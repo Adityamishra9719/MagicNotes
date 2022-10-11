@@ -40,6 +40,7 @@ footer p{
     margin: 16px;
     float: left;
     word-wrap: break-word;
+    text-transform: uppercase;
 }
 .note h1{
     margin-bottom: 7px;
