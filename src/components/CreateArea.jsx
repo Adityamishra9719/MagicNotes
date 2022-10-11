@@ -6,6 +6,7 @@ function CreateArea(props) {
             title: "",
             content: ""
         });
+        const [alert, setAlert] = React.useState(false);
 
         function handleChange(event){
             const {name, value} = event.target; 
@@ -20,15 +21,24 @@ function CreateArea(props) {
 
 
         function submitNote(event){
+            if(note.title == '' && note.content == ''){
+                setAlert(true);
+                setTimeout(() => setAlert(false), 2000);
+                return;
+            }
             props.onAdd(note);
             setNote({
                 title: "",
                 content: ""
             });
-            event.preventDefault();
+            
         }
 
-
+        const message = (
+            <div class="alert alert-danger" role="alert">
+                    Write Something...
+            </div>
+        );
 
     return (
         <div className="noteblock">
@@ -45,7 +55,8 @@ function CreateArea(props) {
                 placeholder="Make a Note..." 
                 rows="3"
                 />
-            <button  onClick={submitNote} >Add</button>
+                <div>{alert ? message : null}</div>
+            <button type="button" onClick={submitNote} >Add</button>
             </form>
         </div>
     )
